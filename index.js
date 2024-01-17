@@ -1,4 +1,4 @@
-import {generateVehicles} from './generator/vehicle.js';
+import {generateVehicles} from './generator/vehicleList.js';
 
 const index_dataFlag = process.argv.findIndex(x => x === '-d');
 const index_data_value = index_dataFlag + 1;

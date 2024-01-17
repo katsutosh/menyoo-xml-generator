@@ -1,12 +1,5 @@
-import fs from 'fs';
-import xml2js from 'xml2js';
-import convert from 'xml-js';
-import {getDataFromGithub, githubUrl} from './_helper.js';
+import {fileNames, getDataFromGithub, githubUrl, writeToFile} from './_helper.js';
 
-/*
-Remove Pickup from Menyoo code
-
- */
 const vehicleClass =
     {
         'Compact': 0,
@@ -78,15 +71,9 @@ export async function generateVehicles() {
             result += getClassVehicles(data, vClass);
             result += `\t</Category>\n`;
         }
-        
-        result += `</VehicleList>`
 
-        fs.writeFile('./generated/VehicleList.xml', result, err => {
-            if (err) {
-                console.error(err);
-            }
-            console.log('VehicleList.xml generated successfully');
-        });
+        result += `</VehicleList>`;
+        writeToFile(fileNames.vehicleList, result);
     }
 }
 
