@@ -57,18 +57,18 @@ export async function generateVehicles() {
         data = data.filter(x => !x.DlcName.toLowerCase().includes('g9ec'));
         let result = '<?xml version="1.0" encoding="ISO-8859-1"?>\n' +
             '<VehicleList>\n';
-        for(const vClass of Object.keys(menyooClasses)) {
+        for(const mClass of Object.keys(menyooClasses)) {
             let categoryComment = '';
-            if (menyooClasses[vClass].length > 1) {
+            if (menyooClasses[mClass].length > 1) {
                 categoryComment += '<!--';
-                for(const [index, c] of menyooClasses[vClass].entries()) {
+                for(const [index, c] of menyooClasses[mClass].entries()) {
                     const categoryName = Object.keys(vehicleClass).find(x => vehicleClass[x] === c);
                     categoryComment += `${index === 0 ? '' : '+'} ${categoryName} `;
                 }
                 categoryComment += '-->';
             }
-            result += `\t<Category name=\"${vClass}\">${categoryComment}\n`;
-            result += getClassVehicles(data, vClass);
+            result += `\t<Category name=\"${mClass}\">${categoryComment}\n`;
+            result += getClassVehicles(data, mClass);
             result += `\t</Category>\n`;
         }
 
@@ -77,18 +77,17 @@ export async function generateVehicles() {
     }
 }
 
-function getClassVehicles(data, vClass) {
+function getClassVehicles(data, mClass) {
     let classVehicles = [];
-    if (vClass !== 'Trailer') {
-        classVehicles = data.filter(x => x.Type !== 'TRAILER' && menyooClasses[vClass].includes(x.ClassId));
+    if (mClass !== 'Trailer') {
+        classVehicles = data.filter(x => x.Type !== 'TRAILER' && menyooClasses[mClass].includes(x.ClassId));
     } else {
         classVehicles = data.filter(x => x.Type === 'TRAILER');
     }
 
     let vehicles = '';
     for(const veh of classVehicles) {
-        const vehicle = `\t\t<Vehicle name=\"${veh.Name.toUpperCase()}\" /><!-- ${veh.DisplayName.English || veh.Name} -->\n`;
-
+        const vehicle = `\t\t<Vehicle name=\"${veh.Name.toUpperCase()}\" /><!-- ${veh.DisplayName?.English || veh.Name} -->\n`;
         vehicles += vehicle;
     }
     return vehicles;

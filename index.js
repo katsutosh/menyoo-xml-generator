@@ -5,12 +5,12 @@ const index_data_value = index_dataFlag + 1;
 
 if (process.argv[index_dataFlag]) {
     switch(process.argv[index_data_value]) {
-        case 'vehicle': {
+        case 'vehiclelist': {
             await generateVehicles();
             break;
         }
         default: {
-            console.log('use -d vehicle');
+            console.log('use -d vehiclelist');
         }
     }
 }

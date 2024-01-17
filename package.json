@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "generatevehicle": "node index.js -d vehicle"
+    "generatevehiclelist": "node index.js -d vehiclelist",
   },
   "author": "",
   "license": "ISC",
