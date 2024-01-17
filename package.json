@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generatevehicle": "node index.js -d vehicle"
     "generatevehiclelist": "node index.js -d vehiclelist",
+    "generatepedlist": "node index.js -d pedlist"
   },
   "author": "",
   "license": "ISC",

@@ -2,11 +2,13 @@ import fs from 'fs';
 import axios from 'axios';
 
 export const githubUrl = {
-    'vehicles': 'https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/vehicles.json'
+    'vehicles': 'https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/vehicles.json',
+    'peds': 'https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/peds.json'
 };
 
 export const fileNames = {
-    vehicleList: 'VehicleList'
+    vehicleList: 'VehicleList',
+    pedList: 'PedList',
 }
 
 export async function getDataFromGithub(url) {
