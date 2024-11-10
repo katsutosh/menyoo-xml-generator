@@ -41,6 +41,10 @@
     "ig_roostermccraw",
     "ig_soundeng_00",
     "ig_subcrewhead",
+    "mp_headtargets",
     "s_m_m_studiosoueng_02",
-    "s_m_y_xmech_02_mp"
+    "s_m_y_xmech_02_mp",
+    "slod_human",
+    "slod_large_quadped",
+    "slod_small_quadped"
 ]
