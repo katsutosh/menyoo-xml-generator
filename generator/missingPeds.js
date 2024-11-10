@@ -4245,9 +4245,10 @@ const pedListXml = oldPed.PedList.Category.reduce((acc, category) => {
 export async function generateMissingPeds() {
     let data = await getDataFromGithub(githubUrl.peds);
     if (data) {
-        data = data.filter(x => !x.DlcName.toLowerCase().includes('g9ec') && !x.Name.toLowerCase().startsWith('slod_') && x.Name.toLowerCase() !== 'mp_headtargets');
+        data = data.filter(x => !x.DlcName.toLowerCase().includes('g9ec'));
         const newPedsNames = data.map(x=>{return x.Name.toLowerCase()})
         const missingInPedlistXml = newPedsNames.filter(item => !pedListXml.includes(item));
+        console.log(missingInPedlistXml.length)
         writeToFile('missingInPedlistXml.json', JSON.stringify(missingInPedlistXml, null, 4))
     }
 }
