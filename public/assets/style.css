@@ -1,0 +1,59 @@
+.center-container {
+    display: flex;
+    justify-content: center; /* Centers buttons horizontally */
+    align-items: center; /* Centers buttons vertically */
+    height: 100vh; /* Full height of the viewport */
+    gap: 20px; /* Adds space between the buttons */
+}
+
+/* Container div as flexbox */
+.container {
+    display: flex;
+    gap: 20px; /* space between divs */
+}
+
+/* Style for each div */
+.box {
+    flex: 1; /* makes both divs take up equal space */
+    padding: 20px;
+    white-space: pre-wrap;
+}
+/* Each section container with heading and content */
+.section {
+    flex: 1; /* Makes each section take up equal space */
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+/* Heading style for each section */
+.section-heading {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+/* Container to hold the form inline */
+.inline-form {
+    flex: 1;
+    display: flex;
+    align-items: center; /* Aligns items vertically centered */
+    gap: 10px; /* Space between elements */
+    padding-bottom: 20px;
+}
+
+/* Optional styling for the input and button */
+input[type="text"] {
+    padding: 5px;
+    font-size: 1em;
+    width: 100%;
+}
+textarea {
+    padding: 5px;
+    font-size: 1em;
+    width: 100%;
+}
+
+button {
+    padding: 6px 12px;
+    font-size: 1em;
+    cursor: pointer;
+}
