@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Data to Backend</title>
+
+    <style>
+        /* Container div as flexbox */
+        .container {
+            display: flex;
+            gap: 20px; /* space between divs */
+        }
+
+        /* Style for each div */
+        .box {
+            flex: 1; /* makes both divs take up equal space */
+            padding: 20px;
+            white-space: pre-wrap;
+        }
+        /* Each section container with heading and content */
+        .section {
+            flex: 1; /* Makes each section take up equal space */
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        /* Heading style for each section */
+        .section-heading {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        /* Container to hold the form inline */
+        .inline-form {
+            flex: 1;
+            display: flex;
+            align-items: center; /* Aligns items vertically centered */
+            gap: 10px; /* Space between elements */
+            padding-bottom: 20px;
+        }
+
+        /* Optional styling for the input and button */
+        input[type="text"] {
+            padding: 5px;
+            font-size: 1em;
+            width: 100%;
+        }
+        textarea {
+            padding: 5px;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        button {
+            padding: 6px 12px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h2>Check difference between DurtyFree's Github Repo Pedlist and yours</h2>
+<div>
+    <div class="container">
+        <form class="inline-form" id="urlForm">
+            <label for="url">URL:</label>
+            <input placeholder="https://raw.githubusercontent.com/..../PedList.xml" type="text" id="url" name="url" required>
+            <button type="submit" id="submitButton">Submit</button>
+        </form>
+
+        <form class="inline-form" id="rawXmlForm">
+            <label for="rawXml">RawXml:</label>
+            <textarea placeholder="Pedlist XML" id="rawXml" name="rawXml" required></textarea>
+            <button type="submit" id="submitButton2">Submit</button>
+        </form>
+    </div>
+    <div class="container">
+        <div class="section">
+            <div class="section-heading">Wrong Peds in your list</div>
+            <div class="box" id="wrongPeds"></div>
+        </div>
+        <div class="section">
+            <div class="section-heading">Missing Peds in your list</div>
+            <div class="box" id="missingPeds"></div>
+        </div>
+    </div>
+</div>
+<script>
+    // JavaScript to handle form submission
+    document.getElementById('urlForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const url = document.getElementById('url').value;
+        document.getElementById('submitButton').disabled = true;
+        try {
+            const response = await fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url })
+            });
+
+            const result = await response.json();
+            document.getElementById('submitButton').disabled = false;
+            document.getElementById('wrongPeds').textContent = displayJsonWithoutBrackets(result.pedsData.wrongInPedListXml);
+            document.getElementById('missingPeds').textContent = displayJsonWithoutBrackets(result.pedsData.missingInPedlistXml);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    });
+    document.getElementById('rawXmlForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const rawXml = document.getElementById('rawXml').value;
+        document.getElementById('submitButton2').disabled = true;
+        try {
+            const response = await fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ rawXml })
+            });
+            const result = await response.json();
+            document.getElementById('submitButton2').disabled = false;
+            document.getElementById('wrongPeds').textContent = displayJsonWithoutBrackets(result.pedsData.wrongInPedListXml);
+            document.getElementById('missingPeds').textContent = displayJsonWithoutBrackets(result.pedsData.missingInPedlistXml);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    });
+    function displayJsonWithoutBrackets(data) {
+        return data.join('\n\n')
+    }
+</script>
+</body>
+</html>
