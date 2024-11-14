@@ -9,7 +9,7 @@ export async function generateMissingPeds(pedsXmlUrl, pedsRawXml) {
     }
     let data = await getDataFromGithub(githubUrl.peds);
     if (data && data2) {
-        data = data.filter(x => !x.DlcName.toLowerCase().includes('g9ec'));
+        data = data.filter(x => !x.DlcName.toLowerCase().includes('g9ec') && !x.Name.toLowerCase().startsWith('slod_') && x.Name.toLowerCase() !== 'mp_headtargets');
         const oldPedList = convertXmlToJson(data2);
         const pedListXml = oldPedList.PedList?.Category?.reduce((acc, category) => {
             if (category.Ped) {
