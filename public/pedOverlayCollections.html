@@ -8,29 +8,29 @@
     <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-<h2>Check difference between DurtyFree's Github Repo Pedlist and yours</h2>
+<h2>Check difference between DurtyFree's Github Repo PedOverlayCollection and yours</h2>
 <div>
     <div class="container">
         <form class="inline-form" id="urlForm">
             <label for="url">URL:</label>
-            <input placeholder="https://raw.githubusercontent.com/..../PedList.xml" type="text" id="url" name="url" required>
+            <input placeholder="https://raw.githubusercontent.com/..../pedOverlayCollections.xml" type="text" id="url" name="url" required>
             <button type="submit" id="submitButton">Submit</button>
         </form>
 
         <form class="inline-form" id="rawXmlForm">
             <label for="rawXml">RawXml:</label>
-            <textarea placeholder="Pedlist XML" id="rawXml" name="rawXml" required></textarea>
+            <textarea placeholder="PedOverlayCollections XML" id="rawXml" name="rawXml" required></textarea>
             <button type="submit" id="submitButton2">Submit</button>
         </form>
     </div>
     <div class="container">
         <div class="section">
-            <div class="section-heading">Wrong Peds in your list</div>
-            <div class="box" id="wrongPeds"></div>
+            <div class="section-heading">Wrong PedOverlayCollections in your list</div>
+            <div class="box" id="wrongPedOverlayCollections"></div>
         </div>
         <div class="section">
-            <div class="section-heading">Missing Peds in your list</div>
-            <div class="box" id="missingPeds"></div>
+            <div class="section-heading">Missing PedOverlayCollections in your list</div>
+            <div class="box" id="missingPedOverlayCollections"></div>
         </div>
     </div>
 </div>
@@ -42,7 +42,7 @@
         const url = document.getElementById('url').value;
         document.getElementById('submitButton').disabled = true;
         try {
-            const response = await fetch('/submitPeds', {
+            const response = await fetch('/submitPedOverlayCollections', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,8 +52,8 @@
 
             const result = await response.json();
             document.getElementById('submitButton').disabled = false;
-            document.getElementById('wrongPeds').textContent = displayJsonWithoutBrackets(result.pedsData.wrongInPedListXml);
-            document.getElementById('missingPeds').textContent = displayJsonWithoutBrackets(result.pedsData.missingInPedlistXml);
+            document.getElementById('wrongPedOverlayCollections').textContent = displayJsonWithoutBrackets(result.pedsData.wrongInPedListXml);
+            document.getElementById('missingPedOverlayCollections').textContent = displayJsonWithoutBrackets(result.pedsData.missingInPedlistXml);
         } catch (error) {
             console.error('Error submitting form:', error);
         }
@@ -64,7 +64,7 @@
         const rawXml = document.getElementById('rawXml').value;
         document.getElementById('submitButton2').disabled = true;
         try {
-            const response = await fetch('/submitPeds', {
+            const response = await fetch('/submitPedOverlayCollections', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -73,8 +73,8 @@
             });
             const result = await response.json();
             document.getElementById('submitButton2').disabled = false;
-            document.getElementById('wrongPeds').textContent = displayJsonWithoutBrackets(result.pedsData.wrongInPedListXml);
-            document.getElementById('missingPeds').textContent = displayJsonWithoutBrackets(result.pedsData.missingInPedlistXml);
+            document.getElementById('wrongPedOverlayCollections').textContent = displayJsonWithoutBrackets(result.pedsData.wrongInPedListXml);
+            document.getElementById('missingPedOverlayCollections').textContent = displayJsonWithoutBrackets(result.pedsData.missingInPedlistXml);
         } catch (error) {
             console.error('Error submitting form:', error);
         }

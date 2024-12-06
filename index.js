@@ -18,6 +18,7 @@ if (process.argv[index_dataFlag]) {
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {generateMissingPedOverlayCollections} from './generator/missingPedOverlayCollections.js';
 const app = express();
 const port = 3000;
 // Get __filename and __dirname
@@ -28,13 +29,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Route to handle the form data
-app.post('/submit', async (req, res) => {
+app.post('/submitPeds', async (req, res) => {
     const {url, rawXml} = req.body;
     const pedsData = await generateMissingPeds(url, rawXml);
     //console.log('Received data:', {url, rawXml}, pedsData);
 
     // Send a response back to the client
     res.send({success: true, pedsData});
+});
+
+// Route to handle the form data
+app.post('/submitPedOverlayCollections', async (req, res) => {
+    const {url, rawXml} = req.body;
+    const data = await generateMissingPedOverlayCollections(url, rawXml);
+    //console.log('Received data:', {url, rawXml}, pedsData);
+
+    // Send a response back to the client
+    res.send({success: true, data});
 });
 
 // Serve static files from the 'public' folder (optional)

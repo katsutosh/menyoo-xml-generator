@@ -4,6 +4,7 @@ import xml2js from 'xml2js';
 
 export const githubUrl = {
     'peds': 'https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/peds.json',
+    'pedOverlayCollections': 'https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/refs/heads/master/pedOverlayCollections.json'
 };
 
 export async function getDataFromGithub(url) {
